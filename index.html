@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>SQUP Ractive Example</title>
+</head>
+<body>
+<div id="target"></div>
+
+<!-- core-tile contains both a config component and a display component -->
+<script id="core-tile" type="text/ractive">
+    <configlist stuff="{{stuff.stuffList}}"/>
+	{{>tilePartial}}
+</script>
+
+<!-- display components have a generic basetile for simple functionality -->
+<script id="basetile-list" type="text/ractive">
+    <corelist displayItems="{{displayStuffs}}"/>
+</script>
+
+<!-- core components are reusable components designed to make adding lists, tables etc. simple -->
+<script id="core-list" type="text/ractive">
+    {{#each headerItems}}
+        <div>
+            {{.}}
+            {{>items}}
+        </div>
+    {{/each}}
+
+    {{#partial items}}
+    <a>
+        {{#each displayItems.items}}
+        <span>
+            {{this}}
+        </span>
+        {{/each}}
+    </a>
+    {{/partial}}
+</script>
+
+<!-- config components are used to configure tiles and are usually added a step to core-wizard -->
+<script id="config-list" type="text/ractive">
+    <button on-click="spliceList">Splice</button>
+</script>
+
+<script src="ractive.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
